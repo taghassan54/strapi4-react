@@ -1,0 +1,29 @@
+{
+  "name": "strapi4-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
+    "@types/node": "^20.12.12",
+    "@types/qs": "^6.9.15",
+    "@types/react": "^18.3.2",
+    "axios": "^1.7.2",
+    "react": "^18.3.1",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "typescript": "^5.4.5",
+    "ufo": "^1.5.3"
+  },
+  "dependencies": {
+    "js-cookie": "^3.0.5",
+    "qs": "^6.12.1"
+  }
+}
