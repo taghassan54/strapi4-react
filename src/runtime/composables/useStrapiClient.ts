@@ -17,26 +17,26 @@ export const useStrapiClient = () => {
 
             const token = getToken()
 
-            //
-            // const headers: AxiosHeaders = new AxiosHeaders()
-            //
-            // headers.setContentType('application/json')
-            // headers.setAccept('application/json')
 
-            //
-            // if (token != null) {
-            //     headers.Authorization = `Bearer ${token}`
-            // }
-            //
-            // if (token == null) {
-            //     headers.setAuthorization(null)
-            // }
+            const headers: AxiosHeaders = new AxiosHeaders()
 
-            const headers={
-                'accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization':token!=null? `Bearer ${adminUrl}`:null,
+            headers.setContentType('application/json')
+            headers.setAccept('application/json')
+
+
+            if (token != null) {
+                headers.Authorization = `Bearer ${token}`
             }
+
+            if (token == null) {
+                headers.setAuthorization(null)
+            }
+
+            // const headers={
+            //     'accept': 'application/json',
+            //     'Content-Type': 'application/json',
+            //     'Authorization':token!=null? `Bearer ${adminUrl}`:null,
+            // }
 
             // Map params according to strapi v3 and v4 formats
             if (fetchOptions.params) {
