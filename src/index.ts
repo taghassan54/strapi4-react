@@ -15,7 +15,7 @@ import {useStrapi} from "./runtime/useStrapi";
 * qs
 *  */
 export {useStrapi} from './runtime/useStrapi'
-export * from './runtime/types/index.d.ts'
+// export * from './runtime/types'
 export * from './runtime/composables'
 
 // export {

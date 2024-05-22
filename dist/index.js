@@ -24,9 +24,14 @@ exports.useStrapi = void 0;
 // import {useStrapiAuth} from "./runtime/composables/useStrapiAuth";
 // import {useStrapiGraphQL} from "./runtime/composables/useStrapiGraphQL";
 // import {useStrapiMedia} from "./runtime/composables/useStrapiMedia";
+/*
+* ufo
+* axios
+* qs
+*  */
 var useStrapi_1 = require("./runtime/useStrapi");
 Object.defineProperty(exports, "useStrapi", { enumerable: true, get: function () { return useStrapi_1.useStrapi; } });
-__exportStar(require("./runtime/types/index"), exports);
+// export * from './runtime/types'
 __exportStar(require("./runtime/composables"), exports);
 // export {
 //     strapiConfig,
