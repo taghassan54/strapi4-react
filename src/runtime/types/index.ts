@@ -573,10 +573,10 @@ export interface StrapiAuthenticationData {
 }
 
 export interface StrapiRegistrationData {
-  username?: string
-  email: string
-  password: string
-  [field: string]: string | number | boolean | object | Array<string | number | boolean | object>
+    username?:any
+    email: string
+    password: string
+    [field: string]: string | number | boolean | object | Array<string | number | boolean | object>
 }
 
 export interface StrapiForgotPasswordData {
