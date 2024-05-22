@@ -9,9 +9,13 @@ import {useStrapi} from "./runtime/useStrapi";
 // import {useStrapiGraphQL} from "./runtime/composables/useStrapiGraphQL";
 // import {useStrapiMedia} from "./runtime/composables/useStrapiMedia";
 
-
+/*
+* ufo
+* axios
+* qs
+*  */
 export {useStrapi} from './runtime/useStrapi'
-export * from './runtime/types/index'
+export * from './runtime/types/index.d.ts'
 export * from './runtime/composables'
 
 // export {
