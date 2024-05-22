@@ -5,4 +5,4 @@ import {useStrapi} from "./runtime/useStrapi";
 * axios
 * qs
 *  */
-export {useStrapi} from './runtime/useStrapi'
+export {useStrapi}
