@@ -8,13 +8,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useStrapiClient = void 0;
 const qs_1 = require("qs");
-const axios_1 = __importDefault(require("axios"));
 const useStrapiUrl_1 = require("./useStrapiUrl");
 const useStrapiToken_1 = require("./useStrapiToken");
 const useStrapiClient = () => {
@@ -49,10 +45,16 @@ const useStrapiClient = () => {
                 }
                 delete fetchOptions.params;
             }
-            let config = Object.assign({ maxBodyLength: Infinity, url: `${isForAdmin ? adminUrl() : userUrl()}/${url}`, headers: headers }, fetchOptions);
+            let config = Object.assign({ maxBodyLength: Infinity, url: `${isForAdmin ? adminUrl() : userUrl()}/${url}`, headers: headers, body: JSON.stringify(fetchOptions.data) }, fetchOptions);
+            const options = {};
+            Object.entries(config).forEach(([key, value]) => {
+                options[key] = value;
+            });
             // const response = await axios(config)
-            const response = yield axios_1.default.request(config);
-            return response.data;
+            // const response = await axios.request(config)
+            const response = fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`, options);
+            // return response.data
+            return yield ((yield response).json());
         }
         catch (e) {
             // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)[version]

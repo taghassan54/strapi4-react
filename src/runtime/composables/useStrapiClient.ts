@@ -48,17 +48,27 @@ export const useStrapiClient = () => {
             }
 
 
+
             let config = {
                 maxBodyLength: Infinity,
                 url: `${isForAdmin ? adminUrl() : userUrl()}/${url}`,
                 headers: headers,
+                body :JSON.stringify(fetchOptions.data),
                 ...fetchOptions
             };
+            const options:any={}
+            Object.entries(config).forEach(([key, value]) => {
+                options[key] = value
+            })
 
             // const response = await axios(config)
-            const response = await axios.request(config)
+            // const response = await axios.request(config)
 
-            return response.data
+            const response =fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`,options)
+
+            // return response.data
+
+            return  await ((await response).json())
 
         } catch (e) {
             // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)[version]
