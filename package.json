@@ -2,15 +2,24 @@
   "name": "strapi4-react",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.js",
+  "type": "commonjs",
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
     "@types/node": "^20.12.12",
@@ -24,6 +33,7 @@
   "dependencies": {
     "axios": "^1.7.2",
     "js-cookie": "^3.0.5",
+    "ofetch": "^1.3.4",
     "qs": "^6.12.1"
   }
 }

@@ -13,6 +13,21 @@ exports.useStrapiClient = void 0;
 const qs_1 = require("qs");
 const useStrapiUrl_1 = require("./useStrapiUrl");
 const useStrapiToken_1 = require("./useStrapiToken");
+const defaultErrors = (err) => ({
+    v4: {
+        error: {
+            status: 500,
+            name: 'UnknownError',
+            message: err.message,
+            details: err
+        }
+    },
+    v3: {
+        error: 'UnknownError',
+        message: err.message,
+        statusCode: 500
+    }
+});
 const useStrapiClient = () => {
     const { userUrl, adminUrl } = (0, useStrapiUrl_1.useStrapiUrl)();
     const { getToken } = (0, useStrapiToken_1.useStrapiToken)();
@@ -50,11 +65,22 @@ const useStrapiClient = () => {
             Object.entries(config).forEach(([key, value]) => {
                 options[key] = value;
             });
-            // const response = await axios(config)
-            // const response = await axios.request(config)
-            const response = fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`, options);
-            // return response.data
-            return yield ((yield response).json());
+            try {
+                // @ts-expect-error method is not explicitly typed
+                return yield $fetch(url, config);
+            }
+            catch (err) {
+                // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)['v4']
+                throw err;
+            }
+            // // const response = await axios(config)
+            // // const response = await axios.request(config)
+            //
+            // const response =fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`,options)
+            //
+            // // return response.data
+            //
+            // return  await ((await response).json())
         }
         catch (e) {
             // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)[version]

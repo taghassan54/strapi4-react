@@ -1,10 +1,29 @@
 import {AxiosHeaders, AxiosRequestConfig} from "axios";
 
+import type { FetchError, FetchOptions } from 'ofetch'
+
+
 import {stringify} from 'qs'
 import axios from 'axios';
 import {useStrapiUrl} from "./useStrapiUrl";
 import {useStrapiToken} from "./useStrapiToken";
+import {Strapi3Error, Strapi4Error} from "../types";
 
+const defaultErrors = (err: FetchError) => ({
+    v4: {
+        error: {
+            status: 500,
+            name: 'UnknownError',
+            message: err.message,
+            details: err
+        }
+    },
+    v3: {
+        error: 'UnknownError',
+        message: err.message,
+        statusCode: 500
+    }
+})
 
 export const useStrapiClient = () => {
 
@@ -61,14 +80,23 @@ export const useStrapiClient = () => {
                 options[key] = value
             })
 
-            // const response = await axios(config)
-            // const response = await axios.request(config)
+            try {
+                // @ts-expect-error method is not explicitly typed
+                return await $fetch<T>(url, config)
+            } catch (err) {
+                // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)['v4']
 
-            const response =fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`,options)
+                throw err
+            }
 
-            // return response.data
-
-            return  await ((await response).json())
+            // // const response = await axios(config)
+            // // const response = await axios.request(config)
+            //
+            // const response =fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`,options)
+            //
+            // // return response.data
+            //
+            // return  await ((await response).json())
 
         } catch (e) {
             // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)[version]
