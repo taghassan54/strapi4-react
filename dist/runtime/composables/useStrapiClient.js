@@ -67,7 +67,7 @@ const useStrapiClient = () => {
             });
             try {
                 // @ts-expect-error method is not explicitly typed
-                return yield $fetch(url, config);
+                return yield fetch(url, config);
             }
             catch (err) {
                 // const e: Strapi4Error | Strapi3Error = err.data || defaultErrors(err)['v4']
