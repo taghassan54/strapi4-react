@@ -50,11 +50,8 @@ const useStrapiClient = () => {
                 delete fetchOptions.params;
             }
             let config = Object.assign({ maxBodyLength: Infinity, url: `${isForAdmin ? adminUrl() : userUrl()}/${url}`, headers: headers }, fetchOptions);
-            // const response = yield (0, axios_1.default)(config);
-            // const response = yield axios_1.request(config);
-            // const response = await axios.request(config)
-            const response=yield fetch(`${isForAdmin ? adminUrl() : userUrl()}/${url}`,config)
-
+            // const response = await axios(config)
+            const response = yield axios_1.default.request(config);
             return response.data;
         }
         catch (e) {

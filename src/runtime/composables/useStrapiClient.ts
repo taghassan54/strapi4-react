@@ -55,8 +55,8 @@ export const useStrapiClient = () => {
                 ...fetchOptions
             };
 
-            const response = await axios(config)
-            // const response = await axios.request(config)
+            // const response = await axios(config)
+            const response = await axios.request(config)
 
             return response.data
 
