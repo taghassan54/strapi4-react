@@ -23,11 +23,11 @@ const useStrapiClient = () => {
     return (url_1, ...args_1) => __awaiter(void 0, [url_1, ...args_1], void 0, function* (url, fetchOptions = {}, isForAdmin = false) {
         try {
             const token = getToken();
-            //
             // const headers: AxiosHeaders = new AxiosHeaders()
             //
             // headers.setContentType('application/json')
             // headers.setAccept('application/json')
+            //
             //
             // if (token != null) {
             //     headers.Authorization = `Bearer ${token}`
@@ -50,7 +50,8 @@ const useStrapiClient = () => {
                 delete fetchOptions.params;
             }
             let config = Object.assign({ maxBodyLength: Infinity, url: `${isForAdmin ? adminUrl() : userUrl()}/${url}`, headers: headers }, fetchOptions);
-            const response = yield axios_1.default.request(config);
+            const response = yield (0, axios_1.default)(config);
+            // const response = await axios.request(config)
             return response.data;
         }
         catch (e) {
